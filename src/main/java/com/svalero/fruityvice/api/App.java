@@ -19,7 +19,7 @@ public class App extends Application {
         ScrollPane mainPane = loader.load();
         Scene scene = new Scene(mainPane);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Use Fruityvice to find out interesting information about fruit and educate yourself");
+        primaryStage.setTitle("Use Fruityvice to find out interesting information about fruit");
         primaryStage.show();
 
     }
