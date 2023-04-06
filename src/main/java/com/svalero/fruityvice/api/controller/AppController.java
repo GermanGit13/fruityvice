@@ -1,6 +1,7 @@
 package com.svalero.fruityvice.api.controller;
 
 import com.svalero.fruityvice.api.model.FruitInformation;
+import com.svalero.fruityvice.api.task.FruitTask;
 import io.reactivex.functions.Consumer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,6 +20,7 @@ public class AppController {
     private Button btListAll;
     @FXML
     private TextArea listAllArea;
+    private FruitTask fruitTask;
 
     private List<String> fruitInformations; //Para guardar las datos recibidos de la API en este caso son definiciones de palabras
 
@@ -32,7 +34,10 @@ public class AppController {
 
         Consumer<FruitInformation> user = (fruitInformation -> {
             listAllArea.setText(listAllArea.getText() + "\n" + fruitInformation.getName() + "\n" + fruitInformation.getFamily()); //lo mostramos en el text Area
-            this.fruitInformations.add(fruitInformation.getName() + fruitInformation.getFamily());
+            this.fruitInformations.add(fruitInformation.getName());
         });
+
+        fruitTask = new FruitTask(user);
+        new Thread(fruitTask).start();
     }
  }
