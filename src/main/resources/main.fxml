@@ -27,7 +27,7 @@
               <tabs>
                 <Tab text="Listado General">
                      <content>
-                        <TextArea prefHeight="200.0" prefWidth="200.0" promptText="listAllArea" />
+                        <TextArea fx:id="listAllArea" prefHeight="200.0" prefWidth="200.0" promptText="listAllArea" />
                      </content>
                   </Tab>
                 <Tab text="Listado Categorias">
