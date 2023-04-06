@@ -14,14 +14,13 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(R.getUI("main.fxml"));
+        loader.setLocation(R.getUI("/main.fxml"));
         loader.setController(new AppController());
         ScrollPane mainPane = loader.load();
         Scene scene = new Scene(mainPane);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Use Fruityvice to find out interesting information about fruit");
         primaryStage.show();
-
     }
 
     @Override

@@ -3,18 +3,19 @@ package com.svalero.fruityvice.api.controller;
 import com.svalero.fruityvice.api.model.FruitInformation;
 import com.svalero.fruityvice.api.task.FruitTask;
 import io.reactivex.functions.Consumer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
-import java.awt.event.ActionEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * declaramos los componentes que tenemos en el fmxl (scene builder)
  */
-public class AppController {
+public class AppController  {
 
     @FXML
     private Button btListAll;
@@ -30,10 +31,11 @@ public class AppController {
      */
     @FXML
     public void showAll(ActionEvent event) {
-        this.fruitInformations = new ArrayList<>(); //creamos una lista nueva cada vez que pulsamos el botón buscar que invoca este método
+        this.fruitInformations = new ArrayList<String>(); //creamos una lista nueva cada vez que pulsamos el botón buscar que invoca este método
+        listAllArea.setText("");
 
         Consumer<FruitInformation> user = (fruitInformation -> {
-            listAllArea.setText(listAllArea.getText() + "\n" + fruitInformation.getName() + "\n" + fruitInformation.getFamily()); //lo mostramos en el text Area
+            listAllArea.setText(listAllArea.getText() + "\n" + fruitInformation.getName()); //lo mostramos en el text Area
             this.fruitInformations.add(fruitInformation.getName());
         });
 

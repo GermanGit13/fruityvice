@@ -16,7 +16,6 @@ public class FruitTask extends Task {
 
     @Override
     protected Object call() throws Exception {
-
         FruitService fruitService = new FruitService(); //creamos el servicio qeu se conecta con la api
         fruitService.getFruits().subscribe(user); //nos subscribimos al observador
 
