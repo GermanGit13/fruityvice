@@ -22,6 +22,7 @@ public class AppController  {
     @FXML
     private TextArea listAllArea;
     private FruitTask fruitTask;
+    private String all; //Para solicitar todas las frutas en Get all
 
     private List<String> fruitInformations; //Para guardar las datos recibidos de la API en este caso son definiciones de palabras
 
@@ -32,6 +33,7 @@ public class AppController  {
     @FXML
     public void showAll(ActionEvent event) {
         this.fruitInformations = new ArrayList<String>(); //creamos una lista nueva cada vez que pulsamos el botón buscar que invoca este método
+        this.all = "all";
         listAllArea.setText("");
 
         Consumer<FruitInformation> user = (fruitInformation -> {

@@ -9,6 +9,7 @@ import javafx.concurrent.Task;
 public class FruitTask extends Task {
 
     public Consumer<FruitInformation> user; //Oservador que consume las fruits
+    private String all; //Para seleccionar la busqueda de todas as frutas
 
     public FruitTask(Consumer<FruitInformation> user) {
         this.user = user;

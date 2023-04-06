@@ -16,6 +16,6 @@ public interface FruityViceAPI {
      * Creamos un GET con la URL que vamos a pasarle a la API con los datos de nuestro objeto java
      * Esto lo revisamos en la documentación de la API
      */
-    @GET("/api/fruit/{all}")
-    Observable<List<FruitInformation>> getInformation(@Path("all") String all); //Va a ser un observable lo que recibimos de la API necesitamos RxJava.
+    @GET("/api/fruit/all")
+    Observable<List<FruitInformation>> getInformation(); //Va a ser un observable lo que recibimos de la API necesitamos RxJava.
 }

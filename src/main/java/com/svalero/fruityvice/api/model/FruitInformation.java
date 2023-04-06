@@ -21,5 +21,5 @@ public class FruitInformation {
     private String family; //Family of the Fruit.
     private String genus; //Genus of the Fruit.
     private String order; //Order of the Fruit.
-    private List<Nutrition> nutritions; // List of Nutritions of the Fruit.
+    private ArrayList<Nutrition> nutritions; // List of Nutritions of the Fruit.
 }

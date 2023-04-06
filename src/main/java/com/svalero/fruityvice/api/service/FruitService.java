@@ -53,6 +53,7 @@ public class FruitService {
      * Observable de FruitInformation
      */
     public Observable<FruitInformation> getFruits() {
-        return this.fruityViceAPI.getInformation("all").flatMapIterable(fruitInformation -> fruitInformation); //Aplanamos la lista que recibimos a un objeto fruitInformation
+        return this.fruityViceAPI.getInformation().flatMapIterable(fruitInformation -> fruitInformation); //Aplanamos la lista que recibimos a un objeto fruitInformation
     }
+
 }
