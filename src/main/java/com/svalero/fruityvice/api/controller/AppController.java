@@ -1,6 +1,7 @@
 package com.svalero.fruityvice.api.controller;
 
 import com.svalero.fruityvice.api.model.FruitInformation;
+import com.svalero.fruityvice.api.model.Nutritions;
 import com.svalero.fruityvice.api.task.FamilyTask;
 import com.svalero.fruityvice.api.task.FruitTask;
 import com.svalero.fruityvice.api.task.FruitsTask;
@@ -48,6 +49,8 @@ public class AppController  {
     @FXML
     private TextArea listFamily;
     @FXML
+    private TextArea detailsFruit;
+    @FXML
     private ProgressIndicator pgListAll;
     @FXML
     private ProgressIndicator pgFamily;
@@ -55,7 +58,6 @@ public class AppController  {
     private FruitsTask fruitsTask;
     private FamilyTask familyTask;
     private FruitTask fruitTask;
-
 
     private List<String> fruitInformations; //Para guardar las datos recibidos de la API en este caso son definiciones de palabras
 
@@ -101,7 +103,7 @@ public class AppController  {
             String previousText;
             previousText = listFamily.getText() + "\n";
             Thread.sleep(100);
-            this.listFamily.setText(listFamily.getText() + "\n" + "ID: " + fruitInformation.getId() + " - Name: " + fruitInformation.getName() + " - Family: " + fruitInformation.getFamily());
+            this.listFamily.setText(listFamily.getText() + "\n" + "ID: " + fruitInformation.getId() + " - Name: " + fruitInformation.getName() + " - Family: " + fruitInformation.getFamily() + " - Calorias:" + fruitInformation.getNutritions().getCalories());
             this.fruitInformations.add(fruitInformation.getId() + fruitInformation.getName() + fruitInformation.getGenus()); //Añadimos a la lista para tenerla sin consultar a la API
         });
 
@@ -115,20 +117,32 @@ public class AppController  {
      */
     @FXML
     public void detailsNutritionFruit(ActionEvent event) {
-        int id = Integer.parseInt(tfIdFruit.getText());
+        String id = tfIdFruit.getText();
         tfIdFruit.clear();
         tfIdFruit.requestFocus();;
 
-        Consumer<FruitInformation> userId = (fruitInformation -> {
-            tfName.setText(fruitInformation.getName());
-            tfCarbohydrates.setText(String.valueOf(fruitInformation.getNutrition().getCarbohydrates()));
-            tfProtein.setText(String.valueOf(fruitInformation.getNutrition().getProtein()));
-            tfFat.setText(String.valueOf(fruitInformation.getNutrition().getFat()));
-            tfCalories.setText(String.valueOf(fruitInformation.getNutrition().getCalories()));
-            tfSugar.setText(String.valueOf(fruitInformation.getNutrition().getSugar()));
+        Consumer<Nutritions> userDetails = (fruitInformation -> {
+            String previousText;
+            previousText = detailsFruit.getText() + "\n";
+            Thread.sleep(100);
+            this.detailsFruit.setText(detailsFruit.getText() + "\n" + "ID: " + fruitInformation);
+//            this.fruitInformations.add(fruitInformation.getId() + fruitInformation.getName() + fruitInformation.getGenus()); //Añadimos a la lista para tenerla sin consultar a la API
         });
 
-        fruitTask = new FruitTask(id, userId);
+//        Consumer<FruitInformation> userId = (fruitInformation -> {
+//            tfName.setText(fruitInformation.getName());
+//        });
+//        Consumer<Object> userDetails = (fruitInformation -> {
+//            tfCarbohydrates.setText(String.valueOf(fruitInformation));
+//        });
+
+//            tfProtein.setText(String.valueOf(nutrition.getProtein()));
+//            tfFat.setText(String.valueOf(nutrition.getFat()));
+//            tfCalories.setText(String.valueOf(nutrition.getCalories()));
+//            tfSugar.setText(String.valueOf(fruitInformation.getNutrition().getSugar()));
+
+
+        fruitTask = new FruitTask(id, userDetails);
         new Thread(this.fruitTask).start();
     }
  }

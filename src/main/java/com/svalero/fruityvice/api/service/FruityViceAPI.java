@@ -5,6 +5,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,5 +30,5 @@ public interface FruityViceAPI {
      * GET para la busqueda por ID
      */
     @GET("/api/fruit/{id}")
-    Observable<FruitInformation> getId(@Path("id") int id); //Observable para recibir el detalle de una fruta por id
+    Observable<List<FruitInformation>> getId(@Path("id") String id); //Observable para recibir el detalle de una fruta por id
 }

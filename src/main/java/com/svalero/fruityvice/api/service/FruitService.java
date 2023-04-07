@@ -3,6 +3,7 @@ package com.svalero.fruityvice.api.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.svalero.fruityvice.api.model.FruitInformation;
+import com.svalero.fruityvice.api.model.Nutritions;
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -68,7 +69,12 @@ public class FruitService {
      * Consulta de un Observable: Devolvemos el listado detallado de las frutas por familias
      * Observable de FruitInformation
      */
-    public Observable<FruitInformation> getId(int id) {
-        return this.fruityViceAPI.getId(id); // recibimos un objeto fruitInformation
+    public Observable<Nutritions> getId(String id) {
+        return this.fruityViceAPI.getId(id).flatMapIterable(fruitInformation -> fruitInformation)
+                .map(fruitInformation -> fruitInformation.getNutritions());
     }
+//    public Observable<Nutrition> getId(String id) {
+//        return this.fruityViceAPI.getId(id).flatMapIterable(fruitInformation -> fruitInformation)
+//                .map(fruitInformation -> fruitInformation.getNutrition()).flatMapIterable(nutritions -> nutritions); //Aplanamos la lista que recibimos a un objeto fruitInformation
+//    }
 }

@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Nutrition {
+public class Nutritions {
 
-    private int carbohydrates; //Carbohydrates of the Fruit (per 100g) in gramm.
-    private int protein; // Protein of the Fruit (per 100g) in gramm.
-    private int fat; //Fat of the Fruit (per 100g) in gramm.
+    private float carbohydrates; //Carbohydrates of the Fruit (per 100g) in gramm.
+    private float protein; // Protein of the Fruit (per 100g) in gramm.
+    private float fat; //Fat of the Fruit (per 100g) in gramm.
     private int calories; //Calories of the Fruit (per 100g) in gramm.
-    private int sugar; //Sugar of the Fruit (per 100g) in gramm.
+    private float sugar; //Sugar of the Fruit (per 100g) in gramm.
 }

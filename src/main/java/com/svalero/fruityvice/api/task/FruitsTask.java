@@ -2,6 +2,7 @@ package com.svalero.fruityvice.api.task;
 
 import com.svalero.fruityvice.api.model.FruitInformation;
 import com.svalero.fruityvice.api.service.FruitService;
+import io.reactivex.Observer;
 import io.reactivex.functions.Consumer;
 import javafx.concurrent.Task;
 
