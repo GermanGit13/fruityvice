@@ -18,4 +18,10 @@ public interface FruityViceAPI {
      */
     @GET("/api/fruit/all")
     Observable<List<FruitInformation>> getInformation(); //Va a ser un observable lo que recibimos de la API necesitamos RxJava.
+
+    /**
+     * GET para la busqueda por familia con un Path
+     */
+    @GET("/api/fruit/family/{family}")
+    Observable<List<FruitInformation>> getFamily(@Path("family") String family); //Observable para recibir las familias
 }

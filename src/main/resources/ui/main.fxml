@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <content>
@@ -18,7 +20,20 @@
                <children>
                   <HBox prefHeight="121.0" prefWidth="683.0">
                      <children>
-                        <Button fx:id="btListAll" mnemonicParsing="false" onAction="#showAll" text="Listado Completo de Frutas " />
+                        <Button fx:id="btListAll" mnemonicParsing="false" onAction="#showAll" prefHeight="52.0" prefWidth="205.0" text="Listado Completo de Frutas ">
+                           <graphic>
+                              <ProgressIndicator fx:id="pgListAll" prefHeight="64.0" prefWidth="23.0" progress="0.0" />
+                           </graphic></Button>
+                        <Button fx:id="btFamily" mnemonicParsing="false" onAction="#showFamily" prefHeight="52.0" prefWidth="205.0" text="Listado de Familias ">
+                           <graphic>
+                              <ProgressIndicator fx:id="pgFamily" progress="0.0" />
+                           </graphic>
+                        </Button>
+                        <TextField fx:id="tfFamily" prefWidth="149.0" promptText="Ingrese Familia a buscar">
+                           <HBox.margin>
+                              <Insets top="15.0" />
+                           </HBox.margin>
+                        </TextField>
                      </children>
                   </HBox>
                </children>
@@ -27,12 +42,12 @@
               <tabs>
                 <Tab text="Listado General">
                      <content>
-                        <TextArea fx:id="listAllArea" prefHeight="200.0" prefWidth="200.0" promptText="listAllArea" />
+                        <TextArea fx:id="listAllArea" prefHeight="200.0" prefWidth="200.0" promptText="Listado de Familias" />
                      </content>
                   </Tab>
-                <Tab text="Listado Categorias">
+                <Tab text="Detallle Familia ">
                      <content>
-                        <TextArea prefHeight="200.0" prefWidth="200.0" promptText="listCategory" />
+                        <TextArea fx:id="listFamily" prefHeight="200.0" prefWidth="200.0" promptText="Listado de Familias" />
                      </content>
                   </Tab>
               </tabs>
