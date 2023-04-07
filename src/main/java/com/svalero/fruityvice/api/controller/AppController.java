@@ -37,7 +37,7 @@ public class AppController  {
         listAllArea.setText("");
 
         Consumer<FruitInformation> user = (fruitInformation -> {
-            listAllArea.setText(listAllArea.getText() + "\n" + fruitInformation.getName()); //lo mostramos en el text Area
+            listAllArea.setText(listAllArea.getText() + "\n" + fruitInformation.getName() + " - Familia:" + fruitInformation.getFamily()); //lo mostramos en el text Area
             this.fruitInformations.add(fruitInformation.getName());
         });
 
