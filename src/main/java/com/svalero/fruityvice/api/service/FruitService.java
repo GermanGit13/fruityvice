@@ -63,4 +63,12 @@ public class FruitService {
     public Observable<FruitInformation> getFamily(String family) {
         return this.fruityViceAPI.getFamily(family).flatMapIterable(fruitInformation -> fruitInformation); //Aplanamos la lista que recibimos a un objeto fruitInformation
     }
+
+    /**
+     * Consulta de un Observable: Devolvemos el listado detallado de las frutas por familias
+     * Observable de FruitInformation
+     */
+    public Observable<FruitInformation> getId(int id) {
+        return this.fruityViceAPI.getId(id); // recibimos un objeto fruitInformation
+    }
 }

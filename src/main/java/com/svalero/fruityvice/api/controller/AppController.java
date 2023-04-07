@@ -3,6 +3,7 @@ package com.svalero.fruityvice.api.controller;
 import com.svalero.fruityvice.api.model.FruitInformation;
 import com.svalero.fruityvice.api.task.FamilyTask;
 import com.svalero.fruityvice.api.task.FruitTask;
+import com.svalero.fruityvice.api.task.FruitsTask;
 import io.reactivex.functions.Consumer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +26,23 @@ public class AppController  {
     @FXML
     private Button btFamily;
     @FXML
+    private Button btValorNutrition;
+    @FXML
     private TextField tfFamily;
+    @FXML
+    private TextField tfName;
+    @FXML
+    private TextField tfIdFruit;
+    @FXML
+    private TextField tfCarbohydrates;
+    @FXML
+    private TextField tfProtein;
+    @FXML
+    private TextField tfFat;
+    @FXML
+    private TextField tfCalories;
+    @FXML
+    private TextField tfSugar;
     @FXML
     private TextArea listAllArea;
     @FXML
@@ -35,8 +52,10 @@ public class AppController  {
     @FXML
     private ProgressIndicator pgFamily;
 
-    private FruitTask fruitTask;
+    private FruitsTask fruitsTask;
     private FamilyTask familyTask;
+    private FruitTask fruitTask;
+
 
     private List<String> fruitInformations; //Para guardar las datos recibidos de la API en este caso son definiciones de palabras
 
@@ -62,8 +81,8 @@ public class AppController  {
 //            this.fruitInformations.add(fruitInformation.getName());
 //        });
 
-        fruitTask = new FruitTask(user);
-        new Thread(fruitTask).start();
+        fruitsTask = new FruitsTask(user);
+        new Thread(fruitsTask).start();
     }
 
     /**
@@ -88,5 +107,28 @@ public class AppController  {
 
         familyTask = new FamilyTask(requestedFamily, userFamily);
         new Thread(this.familyTask).start();
+    }
+
+    /**
+     * Método que se realizará al pulsar el boton en el entorno gráfico
+     * esta definido en el onAction
+     */
+    @FXML
+    public void detailsNutritionFruit(ActionEvent event) {
+        int id = Integer.parseInt(tfIdFruit.getText());
+        tfIdFruit.clear();
+        tfIdFruit.requestFocus();;
+
+        Consumer<FruitInformation> userId = (fruitInformation -> {
+            tfName.setText(fruitInformation.getName());
+            tfCarbohydrates.setText(String.valueOf(fruitInformation.getNutrition().getCarbohydrates()));
+            tfProtein.setText(String.valueOf(fruitInformation.getNutrition().getProtein()));
+            tfFat.setText(String.valueOf(fruitInformation.getNutrition().getFat()));
+            tfCalories.setText(String.valueOf(fruitInformation.getNutrition().getCalories()));
+            tfSugar.setText(String.valueOf(fruitInformation.getNutrition().getSugar()));
+        });
+
+        fruitTask = new FruitTask(id, userId);
+        new Thread(this.fruitTask).start();
     }
  }

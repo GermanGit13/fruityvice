@@ -2,15 +2,19 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <content>
@@ -38,11 +42,11 @@
                   </HBox>
                </children>
             </VBox>
-            <TabPane layoutX="7.0" layoutY="118.0" prefHeight="364.0" prefWidth="448.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutX="7.0" layoutY="118.0" prefHeight="353.0" prefWidth="448.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Listado General">
                      <content>
-                        <TextArea fx:id="listAllArea" prefHeight="200.0" prefWidth="200.0" promptText="Listado de Familias" />
+                        <TextArea fx:id="listAllArea" prefHeight="313.0" prefWidth="448.0" promptText="Listado de Familias" />
                      </content>
                   </Tab>
                 <Tab text="Detallle Familia ">
@@ -50,8 +54,80 @@
                         <TextArea fx:id="listFamily" prefHeight="200.0" prefWidth="200.0" promptText="Listado de Familias" />
                      </content>
                   </Tab>
+                  <Tab text="Detallle Fruta">
+                     <content>
+                        <TextArea fx:id="detailsFruit" prefHeight="200.0" prefWidth="200.0" promptText="Listado de Familias" />
+                     </content>
+                  </Tab>
               </tabs>
             </TabPane>
+            <Separator layoutX="460.0" layoutY="118.0" prefHeight="3.0" prefWidth="217.0" />
+            <Separator layoutX="456.0" layoutY="118.0" orientation="VERTICAL" prefHeight="353.0" prefWidth="8.0" />
+            <Separator layoutX="460.0" layoutY="470.0" prefHeight="3.0" prefWidth="217.0" />
+            <Separator layoutX="673.0" layoutY="118.0" orientation="VERTICAL" prefHeight="353.0" prefWidth="8.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="466.0" layoutY="181.0" text="Nombre:" underline="true">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="474.0" layoutY="210.0" text="Carbohidratos:" underline="true">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="476.0" layoutY="241.0" text="Proteinas:" underline="true">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="474.0" layoutY="272.0" text="Grasas:" underline="true">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="474.0" layoutY="305.0" text="Calorias:" underline="true">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="474.0" layoutY="340.0" text="Azúcar:" underline="true">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <Separator layoutX="460.0" layoutY="163.0" prefHeight="3.0" prefWidth="217.0" />
+            <TextField fx:id="tfName" editable="false" layoutX="519.0" layoutY="177.0" prefHeight="25.0" prefWidth="155.0" />
+            <TextField fx:id="tfCarbohydrates" editable="false" layoutX="558.0" layoutY="206.0" prefHeight="25.0" prefWidth="116.0" />
+            <TextField fx:id="tfCalories" editable="false" layoutX="558.0" layoutY="301.0" prefHeight="25.0" prefWidth="116.0" />
+            <TextField fx:id="tfSugar" editable="false" layoutX="558.0" layoutY="336.0" prefHeight="25.0" prefWidth="116.0" />
+            <TextField fx:id="tfFat" editable="false" layoutX="558.0" layoutY="268.0" prefHeight="25.0" prefWidth="116.0" />
+            <TextField fx:id="tfProtein" editable="false" layoutX="558.0" layoutY="237.0" prefHeight="25.0" prefWidth="116.0" />
+            <Button fx:id="btValorNutrition" layoutX="466.0" layoutY="128.0" mnemonicParsing="false" onAction="#detailsNutritionFruit" text="Valores Nutricionales" />
+            <TextField fx:id="tfIdFruit" layoutX="604.0" layoutY="128.0" prefHeight="25.0" prefWidth="67.0" promptText="ID Buscar" />
          </children>
       </AnchorPane>
    </content>

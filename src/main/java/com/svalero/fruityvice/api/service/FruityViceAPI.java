@@ -24,4 +24,10 @@ public interface FruityViceAPI {
      */
     @GET("/api/fruit/family/{family}")
     Observable<List<FruitInformation>> getFamily(@Path("family") String family); //Observable para recibir las familias
+
+    /**
+     * GET para la busqueda por ID
+     */
+    @GET("/api/fruit/{id}")
+    Observable<FruitInformation> getId(@Path("id") int id); //Observable para recibir el detalle de una fruta por id
 }
