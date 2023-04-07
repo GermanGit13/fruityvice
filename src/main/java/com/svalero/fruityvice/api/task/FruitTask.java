@@ -12,15 +12,15 @@ public class FruitTask extends Task {
     private Consumer<Nutritions> nutritionConsumer;
     private String id;
 
-    public FruitTask(String id, Consumer<Nutritions> nutritionConsumer) {
-        this.nutritionConsumer = nutritionConsumer;
+    public FruitTask(String id, Consumer<FruitInformation> userId) {
+        this.userId = userId;
         this.id = id;
     }
 
     @Override
     protected Object call() throws Exception {
         FruitService fruitService = new FruitService();
-        fruitService.getId(id).subscribe(nutritionConsumer);
+        fruitService.getId(id).subscribe(userId);
 
         return null;
     }

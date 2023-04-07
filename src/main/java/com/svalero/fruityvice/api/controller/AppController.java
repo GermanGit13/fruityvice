@@ -121,28 +121,16 @@ public class AppController  {
         tfIdFruit.clear();
         tfIdFruit.requestFocus();;
 
-        Consumer<Nutritions> userDetails = (fruitInformation -> {
-            String previousText;
-            previousText = detailsFruit.getText() + "\n";
-            Thread.sleep(100);
-            this.detailsFruit.setText(detailsFruit.getText() + "\n" + "ID: " + fruitInformation);
-//            this.fruitInformations.add(fruitInformation.getId() + fruitInformation.getName() + fruitInformation.getGenus()); //Añadimos a la lista para tenerla sin consultar a la API
+        Consumer<FruitInformation> userId = (fruitInformation -> {
+            tfName.setText(fruitInformation.getName());
+            tfCarbohydrates.setText(String.valueOf(fruitInformation.getNutritions().getCarbohydrates()));
+            tfProtein.setText(String.valueOf(fruitInformation.getNutritions().getProtein()));
+            tfFat.setText(String.valueOf(fruitInformation.getNutritions().getFat()));
+            tfCalories.setText(String.valueOf(fruitInformation.getNutritions().getCalories()));
+            tfSugar.setText(String.valueOf(fruitInformation.getNutritions().getSugar()));
         });
 
-//        Consumer<FruitInformation> userId = (fruitInformation -> {
-//            tfName.setText(fruitInformation.getName());
-//        });
-//        Consumer<Object> userDetails = (fruitInformation -> {
-//            tfCarbohydrates.setText(String.valueOf(fruitInformation));
-//        });
-
-//            tfProtein.setText(String.valueOf(nutrition.getProtein()));
-//            tfFat.setText(String.valueOf(nutrition.getFat()));
-//            tfCalories.setText(String.valueOf(nutrition.getCalories()));
-//            tfSugar.setText(String.valueOf(fruitInformation.getNutrition().getSugar()));
-
-
-        fruitTask = new FruitTask(id, userDetails);
+        fruitTask = new FruitTask(id, userId);
         new Thread(this.fruitTask).start();
     }
  }

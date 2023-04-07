@@ -69,9 +69,8 @@ public class FruitService {
      * Consulta de un Observable: Devolvemos el listado detallado de las frutas por familias
      * Observable de FruitInformation
      */
-    public Observable<Nutritions> getId(String id) {
-        return this.fruityViceAPI.getId(id).flatMapIterable(fruitInformation -> fruitInformation)
-                .map(fruitInformation -> fruitInformation.getNutritions());
+    public Observable<FruitInformation> getId(String id) {
+        return this.fruityViceAPI.getId(id);
     }
 //    public Observable<Nutrition> getId(String id) {
 //        return this.fruityViceAPI.getId(id).flatMapIterable(fruitInformation -> fruitInformation)

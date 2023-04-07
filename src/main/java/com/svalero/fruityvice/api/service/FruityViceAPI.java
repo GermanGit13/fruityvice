@@ -30,5 +30,5 @@ public interface FruityViceAPI {
      * GET para la busqueda por ID
      */
     @GET("/api/fruit/{id}")
-    Observable<List<FruitInformation>> getId(@Path("id") String id); //Observable para recibir el detalle de una fruta por id
+    Observable<FruitInformation> getId(@Path("id") String id); //Observable para recibir el detalle de una fruta por id
 }
