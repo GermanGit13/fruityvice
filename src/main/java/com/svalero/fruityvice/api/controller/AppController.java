@@ -6,17 +6,13 @@ import com.svalero.fruityvice.api.task.FamilyTask;
 import com.svalero.fruityvice.api.task.FruitTask;
 import com.svalero.fruityvice.api.task.FruitsTask;
 import io.reactivex.functions.Consumer;
-import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * declaramos los componentes que tenemos en el fmxl (scene builder)
@@ -29,6 +25,14 @@ public class AppController {
     private Button btFamily;
     @FXML
     private Button btValorNutrition;
+    @FXML
+    private Button btDetailsFruit;
+    @FXML
+    private Button btAdd;
+    @FXML
+    private Button btCompress;
+    @FXML
+    private Button btExport;
     @FXML
     private TextField tfFamily;
     @FXML
@@ -46,11 +50,31 @@ public class AppController {
     @FXML
     private TextField tfSugar;
     @FXML
+    private TextField tfDetailId;
+    @FXML
+    private TextField tfDetailName;
+    @FXML
+    private TextField tfDetailFamily;
+    @FXML
+    private TextField tfDetailGenus;
+    @FXML
+    private TextField tfDetailOrder;
+    @FXML
+    private TextField tfDetailCarbo;
+    @FXML
+    private TextField tfDetailProtein;
+    @FXML
+    private TextField tfDetailFat;
+    @FXML
+    private TextField tfDetailCalories;
+    @FXML
+    private TextField tfDetailSugar;
+    @FXML
     private TextArea listAllArea;
     @FXML
     private TextArea listFamily;
     @FXML
-    private TextArea detailsFruit;
+    private TextArea listDetailArea;
     @FXML
     private ProgressIndicator piChargeData;
     @FXML
@@ -61,6 +85,7 @@ public class AppController {
     private FruitTask fruitTask;
 
     private List<String> fruitInformations; //Para guardar las datos recibidos de la API en este caso son definiciones de palabras
+    private ArrayList<String> fruitDetails; //Para guardar el detalle de una fruta
 
 //    /**
 //     * Implemento Intialize para usarlo con las listas y la barra de proceso
@@ -84,7 +109,7 @@ public class AppController {
             previousText = listAllArea.getText() + "\n";
             Thread.sleep(100);
             this.listAllArea.setText(listAllArea.getText() + "\n" + "ID: " + fruitInformation.getId() + " - Name: " + fruitInformation.getName() + " - Family: " + fruitInformation.getFamily()); //lo mostramos en el text Area
-            this.fruitInformations.add(fruitInformation.getId() + fruitInformation.getName() + fruitInformation.getFamily());
+            this.fruitInformations.add(fruitInformation.getGenus() + fruitInformation.getName() + fruitInformation.getId() + fruitInformation.getFamily() + fruitInformation.getOrder() + fruitInformation.getNutritions().getCarbohydrates() + fruitInformation.getNutritions().getProtein() + fruitInformation.getNutritions().getFat() + fruitInformation.getNutritions().getCalories() + fruitInformation.getNutritions().getSugar());
             this.piChargeData.setVisible(false);
         });
 
@@ -115,7 +140,7 @@ public class AppController {
             previousText = listFamily.getText() + "\n";
             Thread.sleep(100);
             this.listFamily.setText(listFamily.getText() + "\n" + "ID: " + fruitInformation.getId() + " - Name: " + fruitInformation.getName() + " - Family: " + fruitInformation.getFamily() + " - Calorias:" + fruitInformation.getNutritions().getCalories());
-            this.fruitInformations.add(fruitInformation.getId() + fruitInformation.getName() + fruitInformation.getGenus()); //Añadimos a la lista para tenerla sin consultar a la API
+            this.fruitInformations.add(fruitInformation.getGenus() + fruitInformation.getName() + fruitInformation.getId() + fruitInformation.getFamily() + fruitInformation.getOrder() + fruitInformation.getNutritions().getCarbohydrates() + fruitInformation.getNutritions().getProtein() + fruitInformation.getNutritions().getFat() + fruitInformation.getNutritions().getCalories() + fruitInformation.getNutritions().getSugar());
             this.piChargeData.setVisible(false);
         });
 
@@ -129,6 +154,8 @@ public class AppController {
      */
     @FXML
     public void detailsNutritionFruit(ActionEvent event) {
+        this.fruitDetails = new ArrayList<String>();
+
         String id = tfIdFruit.getText();
         tfIdFruit.clear();
         tfIdFruit.requestFocus();;
@@ -140,6 +167,18 @@ public class AppController {
             tfFat.setText(String.valueOf(fruitInformation.getNutritions().getFat()));
             tfCalories.setText(String.valueOf(fruitInformation.getNutritions().getCalories()));
             tfSugar.setText(String.valueOf(fruitInformation.getNutritions().getSugar()));
+
+//            this.fruitDetails.add(fruitInformation.getGenus() + fruitInformation.getName() + fruitInformation.getId() + fruitInformation.getFamily() + fruitInformation.getOrder() + fruitInformation.getNutritions().getCarbohydrates() + fruitInformation.getNutritions().getProtein() + fruitInformation.getNutritions().getFat() + fruitInformation.getNutritions().getCalories() + fruitInformation.getNutritions().getSugar());
+            this.fruitDetails.add(String.valueOf(fruitInformation.getId()));
+            this.fruitDetails.add(fruitInformation.getName());
+            this.fruitDetails.add(fruitInformation.getGenus());
+            this.fruitDetails.add(fruitInformation.getFamily());
+            this.fruitDetails.add(fruitInformation.getOrder());
+            this.fruitDetails.add(String.valueOf(fruitInformation.getNutritions().getCarbohydrates()));
+            this.fruitDetails.add(String.valueOf(fruitInformation.getNutritions().getProtein()));
+            this.fruitDetails.add(String.valueOf(fruitInformation.getNutritions().getFat()));
+            this.fruitDetails.add(String.valueOf(fruitInformation.getNutritions().getCalories()));
+            this.fruitDetails.add(String.valueOf(fruitInformation.getNutritions().getSugar()));
             this.pgChargeData.setVisible(false);
         });
 
@@ -147,5 +186,38 @@ public class AppController {
         new Thread(this.fruitTask).start();
     }
 
+    /**
+     * Método que se realizara al pulsar el boton en el entorno gráfico
+     * esta definido en el onAction
+     * Cargara los detalles completos de una fruta desde un listado obtenido al listar todas las frutas
+     */
+    @FXML
+    public void detailsFruit(ActionEvent event) {
+        this.listDetailArea.setText("");
 
+        /**
+         * Recogemos los datos de la lista creada al consultar los valores nutricionales para crear un objeto FruitInformation
+         */
+        int id = Integer.parseInt(fruitDetails.get(0).toString());
+        String name = fruitDetails.get(1).toString();
+        String genues = fruitDetails.get(2).toString();
+        String family = fruitDetails.get(3).toString();
+        String order = fruitDetails.get(4).toString();
+        float carbohydrates = Float.parseFloat(fruitDetails.get(5).toString());
+        float protein = Float.parseFloat(fruitDetails.get(6).toString());
+        float fat = Float.parseFloat(fruitDetails.get(7).toString());
+        int calories = Integer.parseInt(fruitDetails.get(8).toString());
+        float sugar = Float.parseFloat(fruitDetails.get(9).toString());
+
+        Nutritions newNutrition = new Nutritions(carbohydrates, protein, fat, calories, sugar);
+        FruitInformation newFruit = new FruitInformation(genues, name, id, family, order, newNutrition);
+
+        this.listDetailArea.setText(listDetailArea.getText() + "\n" + "ID: " + newFruit.getId());
+        this.listDetailArea.setText(listDetailArea.getText() + "\n" + "Name:  " + newFruit.getName());
+
+
+//        for (String fruitDetail : this.fruitDetails) { //recorremos la lista para volver a pintarla en el text area sin la definion que borramos
+//            this.listDetailArea.setText(listDetailArea.getText() + "\n" + fruitDetail); //lo mostramos en el text Area
+//        }
+    }
 }

@@ -12,6 +12,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -50,7 +52,118 @@
                   </Tab>
                   <Tab text="Detallle Fruta">
                      <content>
-                        <TextArea fx:id="detailsFruit" prefHeight="200.0" prefWidth="200.0" promptText="Listado de Familias" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="16.0" layoutY="8.0" text="ID : " underline="true">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="14.0" layoutY="42.0" text="Nombre :" underline="true">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="16.0" layoutY="73.0" text="Familia : " underline="true">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="14.0" layoutY="104.0" text="Género :" underline="true">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="14.0" layoutY="137.0" text="Order :" underline="true">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="262.0" layoutY="8.0" text="Carbohidratos :" underline="true">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="265.0" layoutY="42.0" text="Proteinas :" underline="true">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="265.0" layoutY="73.0" text="Grasas :" underline="true">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="262.0" layoutY="104.0" text="Calorias :" underline="true">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="265.0" layoutY="137.0" text="Azúcar :" underline="true">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.8552631735801697" green="0.8069566488265991" blue="0.13066519796848297" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Label>
+                              <Button fx:id="btAdd" layoutX="240.0" layoutY="185.0" mnemonicParsing="false" prefWidth="125.0" text="Añadir a Excell" />
+                              <Button fx:id="btExport" layoutX="240.0" layoutY="227.0" mnemonicParsing="false" prefWidth="125.0" text="Exportar a Excell" />
+                              <Button fx:id="btCompress" layoutX="240.0" layoutY="269.0" mnemonicParsing="false" prefWidth="125.0" text="Comprimir en zip" />
+                              <ImageView fitHeight="150.0" fitWidth="221.0" layoutX="13.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../GERMAN/Imagenes/frutas-y-frutos-secos.jpg" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="tfDetailId" editable="false" layoutX="75.0" layoutY="4.0" />
+                              <TextField fx:id="tfDetailName" editable="false" layoutX="75.0" layoutY="38.0" />
+                              <TextField fx:id="tfDetailFamily" editable="false" layoutX="75.0" layoutY="69.0" />
+                              <TextField fx:id="tfDetailGenus" editable="false" layoutX="75.0" layoutY="100.0" />
+                              <TextField fx:id="tfDetailOrder" editable="false" layoutX="75.0" layoutY="133.0" />
+                              <TextField fx:id="tfDetailCarbo" editable="false" layoutX="350.0" layoutY="2.0" prefHeight="25.0" prefWidth="83.0" />
+                              <TextField fx:id="tfDetailProtein" editable="false" layoutX="350.0" layoutY="38.0" prefHeight="25.0" prefWidth="83.0" />
+                              <TextField fx:id="tfDetailFat" editable="false" layoutX="350.0" layoutY="69.0" prefHeight="25.0" prefWidth="83.0" />
+                              <TextField fx:id="tfDetailCalories" editable="false" layoutX="350.0" layoutY="100.0" prefHeight="25.0" prefWidth="83.0" />
+                              <TextField fx:id="tfDetailSugar" editable="false" layoutX="351.0" layoutY="133.0" prefHeight="25.0" prefWidth="83.0" />
+                           </children>
+                        </AnchorPane>
                      </content>
                   </Tab>
               </tabs>
@@ -129,6 +242,7 @@
                </effect>
             </Label>
             <ProgressBar fx:id="pgChargeData" layoutX="469.0" layoutY="373.0" prefWidth="200.0" visible="false" />
+            <Button fx:id="btDetailsFruit" layoutX="525.0" layoutY="410.0" mnemonicParsing="false" onAction="#detailsFruit" prefHeight="25.0" prefWidth="89.0" text="Detalles" />
          </children>
       </AnchorPane>
    </content>
