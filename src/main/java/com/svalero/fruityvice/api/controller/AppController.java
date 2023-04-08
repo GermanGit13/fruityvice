@@ -6,21 +6,22 @@ import com.svalero.fruityvice.api.task.FamilyTask;
 import com.svalero.fruityvice.api.task.FruitTask;
 import com.svalero.fruityvice.api.task.FruitsTask;
 import io.reactivex.functions.Consumer;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * declaramos los componentes que tenemos en el fmxl (scene builder)
  */
-public class AppController  {
+public class AppController {
 
     @FXML
     private Button btListAll;
@@ -51,15 +52,23 @@ public class AppController  {
     @FXML
     private TextArea detailsFruit;
     @FXML
-    private ProgressIndicator pgListAll;
+    private ProgressIndicator piChargeData;
     @FXML
-    private ProgressIndicator pgFamily;
+    private ProgressBar pgChargeData;
 
     private FruitsTask fruitsTask;
     private FamilyTask familyTask;
     private FruitTask fruitTask;
 
     private List<String> fruitInformations; //Para guardar las datos recibidos de la API en este caso son definiciones de palabras
+
+//    /**
+//     * Implemento Intialize para usarlo con las listas y la barra de proceso
+//     */
+//    @Override
+//    public void initialize(URL url, ResourceBundle resourceBundle) {
+//        piChargeData.setVisible(true);
+//    }
 
     /**
      * Método que se realizara al pulsar el boton en el entorno gráfico
@@ -76,14 +85,16 @@ public class AppController  {
             Thread.sleep(100);
             this.listAllArea.setText(listAllArea.getText() + "\n" + "ID: " + fruitInformation.getId() + " - Name: " + fruitInformation.getName() + " - Family: " + fruitInformation.getFamily()); //lo mostramos en el text Area
             this.fruitInformations.add(fruitInformation.getId() + fruitInformation.getName() + fruitInformation.getFamily());
+            this.piChargeData.setVisible(false);
         });
 
+        //Forma directa para evitar error de la API
 //        Consumer<FruitInformation> user = (fruitInformation -> {
 //            listAllArea.setText(listAllArea.getText() + "\n" + "ID: " + fruitInformation.getId() + "- Name: " + fruitInformation.getName() + " - Family:" + fruitInformation.getFamily()); //lo mostramos en el text Area
 //            this.fruitInformations.add(fruitInformation.getName());
 //        });
 
-        fruitsTask = new FruitsTask(user);
+        fruitsTask = new FruitsTask(user, piChargeData);
         new Thread(fruitsTask).start();
     }
 
@@ -105,9 +116,10 @@ public class AppController  {
             Thread.sleep(100);
             this.listFamily.setText(listFamily.getText() + "\n" + "ID: " + fruitInformation.getId() + " - Name: " + fruitInformation.getName() + " - Family: " + fruitInformation.getFamily() + " - Calorias:" + fruitInformation.getNutritions().getCalories());
             this.fruitInformations.add(fruitInformation.getId() + fruitInformation.getName() + fruitInformation.getGenus()); //Añadimos a la lista para tenerla sin consultar a la API
+            this.piChargeData.setVisible(false);
         });
 
-        familyTask = new FamilyTask(requestedFamily, userFamily);
+        familyTask = new FamilyTask(requestedFamily, userFamily, piChargeData);
         new Thread(this.familyTask).start();
     }
 
@@ -128,9 +140,12 @@ public class AppController  {
             tfFat.setText(String.valueOf(fruitInformation.getNutritions().getFat()));
             tfCalories.setText(String.valueOf(fruitInformation.getNutritions().getCalories()));
             tfSugar.setText(String.valueOf(fruitInformation.getNutritions().getSugar()));
+            this.pgChargeData.setVisible(false);
         });
 
-        fruitTask = new FruitTask(id, userId);
+        fruitTask = new FruitTask(id, userId, pgChargeData);
         new Thread(this.fruitTask).start();
     }
- }
+
+
+}

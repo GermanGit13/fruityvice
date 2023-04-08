@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -20,24 +21,17 @@
    <content>
       <AnchorPane prefHeight="485.0" prefWidth="683.0">
          <children>
-            <VBox prefHeight="118.0" prefWidth="683.0">
+            <VBox prefHeight="70.0" prefWidth="527.0">
                <children>
-                  <HBox prefHeight="121.0" prefWidth="683.0">
+                  <HBox prefHeight="64.0" prefWidth="581.0">
                      <children>
-                        <Button fx:id="btListAll" mnemonicParsing="false" onAction="#showAll" prefHeight="52.0" prefWidth="205.0" text="Listado Completo de Frutas ">
-                           <graphic>
-                              <ProgressIndicator fx:id="pgListAll" prefHeight="64.0" prefWidth="23.0" progress="0.0" />
-                           </graphic></Button>
-                        <Button fx:id="btFamily" mnemonicParsing="false" onAction="#showFamily" prefHeight="52.0" prefWidth="205.0" text="Listado de Familias ">
-                           <graphic>
-                              <ProgressIndicator fx:id="pgFamily" progress="0.0" />
-                           </graphic>
-                        </Button>
-                        <TextField fx:id="tfFamily" prefWidth="149.0" promptText="Ingrese Familia a buscar">
-                           <HBox.margin>
-                              <Insets top="15.0" />
-                           </HBox.margin>
-                        </TextField>
+                        <AnchorPane prefHeight="64.0" prefWidth="531.0">
+                           <children>
+                              <Button fx:id="btListAll" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#showAll" prefHeight="52.0" prefWidth="172.0" text="Listado Completo de Frutas " />
+                              <Button fx:id="btFamily" layoutX="202.0" layoutY="12.0" mnemonicParsing="false" onAction="#showFamily" prefHeight="52.0" prefWidth="159.0" text="Listado de Familias " />
+                              <TextField fx:id="tfFamily" layoutX="367.0" layoutY="26.0" prefWidth="149.0" promptText="Ingrese Familia a buscar" />
+                           </children>
+                        </AnchorPane>
                      </children>
                   </HBox>
                </children>
@@ -128,6 +122,13 @@
             <TextField fx:id="tfProtein" editable="false" layoutX="558.0" layoutY="237.0" prefHeight="25.0" prefWidth="116.0" />
             <Button fx:id="btValorNutrition" layoutX="466.0" layoutY="128.0" mnemonicParsing="false" onAction="#detailsNutritionFruit" text="Valores Nutricionales" />
             <TextField fx:id="tfIdFruit" layoutX="604.0" layoutY="128.0" prefHeight="25.0" prefWidth="67.0" promptText="ID Buscar" />
+            <ProgressIndicator fx:id="piChargeData" layoutX="540.0" layoutY="26.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="88.0" prefWidth="128.0" visible="false" />
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="563.0" layoutY="6.0" text="Carga de Datos" underline="true">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Label>
+            <ProgressBar fx:id="pgChargeData" layoutX="469.0" layoutY="373.0" prefWidth="200.0" visible="false" />
          </children>
       </AnchorPane>
    </content>
