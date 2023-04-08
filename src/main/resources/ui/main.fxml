@@ -10,7 +10,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -145,7 +144,7 @@
                                     </DropShadow>
                                  </effect>
                               </Label>
-                              <Button fx:id="btAdd" layoutX="240.0" layoutY="185.0" mnemonicParsing="false" prefWidth="125.0" text="Añadir a Excell" />
+                              <Button fx:id="btAdd" layoutX="240.0" layoutY="185.0" mnemonicParsing="false" onAction="#addCSV" prefWidth="125.0" text="Añadir a Excell" />
                               <Button fx:id="btExport" layoutX="240.0" layoutY="227.0" mnemonicParsing="false" onAction="#exportCSV" prefWidth="125.0" text="Exportar a Excell" />
                               <Button fx:id="btCompress" layoutX="240.0" layoutY="269.0" mnemonicParsing="false" prefWidth="125.0" text="Comprimir en zip" />
                               <ImageView fitHeight="150.0" fitWidth="221.0" layoutX="13.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
@@ -241,12 +240,7 @@
             <TextField fx:id="tfProtein" editable="false" layoutX="558.0" layoutY="237.0" prefHeight="25.0" prefWidth="116.0" />
             <Button fx:id="btValorNutrition" layoutX="466.0" layoutY="128.0" mnemonicParsing="false" onAction="#detailsNutritionFruit" text="Valores Nutricionales" />
             <TextField fx:id="tfIdFruit" layoutX="604.0" layoutY="128.0" prefHeight="25.0" prefWidth="67.0" promptText="ID Buscar" />
-            <ProgressIndicator fx:id="piChargeData" layoutX="540.0" layoutY="26.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="88.0" prefWidth="128.0" visible="false" />
-            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="6.0" layoutX="563.0" layoutY="6.0" text="Carga de Datos" underline="true">
-               <effect>
-                  <Bloom />
-               </effect>
-            </Label>
+            <ProgressIndicator fx:id="piChargeData" layoutX="540.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="109.0" prefWidth="128.0" visible="false" />
             <ProgressBar fx:id="pgChargeData" layoutX="469.0" layoutY="373.0" prefWidth="200.0" visible="false" />
             <Button fx:id="btDetailsFruit" layoutX="499.0" layoutY="408.0" mnemonicParsing="false" onAction="#detailsFruit" text="Ver en Pestaña Detalles" />
          </children>

@@ -92,7 +92,7 @@ public class AppController {
 
     private List<String> fruitInformations; //Para guardar las datos recibidos de la API en este caso son definiciones de palabras
     private ArrayList<String> fruitDetails; //Para guardar el detalle de una fruta
-    private List<String> exportFruits; //Para crear una lista de frutas que exportar a CSV
+    private List<String> exportFruits = new ArrayList<String>(); //Para crear una lista de frutas que exportar a CSV
 
     Nutritions newNutrition;
     FruitInformation newFruit;
@@ -140,6 +140,7 @@ public class AppController {
     @FXML
     public void showFamily(ActionEvent event) {
         this.fruitInformations = new ArrayList<String>();
+
         String requestedFamily = tfFamily.getText(); //recogemos el valor de TextField con el nombre de la familia a buscar
         tfFamily.clear();
         tfFamily.requestFocus();
@@ -203,8 +204,6 @@ public class AppController {
      */
     @FXML
     public void detailsFruit(ActionEvent event) {
-//        this.listDetailArea.setText("");
-
         /**
          * Recogemos los datos de la lista creada al consultar los valores nutricionales para crear un objeto FruitInformation
          */
@@ -219,11 +218,10 @@ public class AppController {
         int calories = Integer.parseInt(fruitDetails.get(8).toString());
         float sugar = Float.parseFloat(fruitDetails.get(9).toString());
 
-//        Nutritions newNutrition = new Nutritions(carbohydrates, protein, fat, calories, sugar);
-//        FruitInformation newFruit = new FruitInformation(genues, name, id, family, order, newNutrition);
-        this.newNutrition = new Nutritions(carbohydrates, protein, fat, calories, sugar);
-        this.newFruit = new FruitInformation(genues, name, id, family, order, newNutrition);
+        this.newNutrition = new Nutritions(carbohydrates, protein, fat, calories, sugar); //Usamos el objeto Nutrions para asignarle los datos
+        this.newFruit = new FruitInformation(genues, name, id, family, order, newNutrition); //Usamos el objeto FruitInformation y le pasamos los datos y el objeto Nutrition
 
+        //Pintamos los datos en la pantalla mediante el objeto newFruit
         tfDetailId.setText(String.valueOf(newFruit.getId()));
         tfDetailName.setText(newFruit.getName());
         tfDetailFamily.setText(newFruit.getFamily());
@@ -235,13 +233,22 @@ public class AppController {
         tfDetailCalories.setText(String.valueOf(newFruit.getNutritions().getCalories()));
         tfDetailSugar.setText(String.valueOf(newFruit.getNutritions().getSugar()));
 
-        this.exportFruits.add(newFruit.getGenus() + newFruit.getName() + newFruit.getId() + newFruit.getFamily() + newFruit.getOrder() + newFruit.getNutritions().getCarbohydrates() + newFruit.getNutritions().getProtein() + newFruit.getNutritions().getFat() + newFruit.getNutritions().getCalories() + newFruit.getNutritions().getSugar());
+//        this.fruitDetails.add(newFruit.getGenus() + newFruit.getName() + newFruit.getId() + newFruit.getFamily() + newFruit.getOrder() + newFruit.getNutritions().getCarbohydrates() + newFruit.getNutritions().getProtein() + newFruit.getNutritions().getFat() + newFruit.getNutritions().getCalories() + newFruit.getNutritions().getSugar());
 
 //        this.listDetailArea.setText(listDetailArea.getText() + "\n" + "ID: " + newFruit.getId());
 //        this.listDetailArea.setText(listDetailArea.getText() + "\n" + "Name:  " + newFruit.getName());
 //        for (String fruitDetail : this.fruitDetails) { //recorremos la lista para volver a pintarla en el text area sin la definion que borramos
 //            this.listDetailArea.setText(listDetailArea.getText() + "\n" + fruitDetail); //lo mostramos en el text Area
 //        }
+    }
+
+    /**
+     * Añadir a listado para crear CSV personalizado
+     */
+    @FXML
+    public void addCSV(ActionEvent event) {
+
+         this.exportFruits.add(newFruit.getGenus() + newFruit.getName() + newFruit.getId() + newFruit.getFamily() + newFruit.getOrder() + newFruit.getNutritions().getCarbohydrates() + newFruit.getNutritions().getProtein() + newFruit.getNutritions().getFat() + newFruit.getNutritions().getCalories() + newFruit.getNutritions().getSugar());
     }
 
     /**
@@ -263,11 +270,13 @@ public class AppController {
             FileWriter writer = new FileWriter(outputFile); //
             CSVWriter csvWriter = new CSVWriter(writer); //Libreria opencsv
             List<String[]> data = new ArrayList<String[]>(); // Lista de arrays de string lo guardamos xtodo en una estructura de datos antes de volcarla al csv
-            for (String fruit : this.fruitDetails){
-                data.add(new String[] {fruit}); //cada fila una deficinon y un numero random
+            for (String fruit : this.exportFruits){
+                data.add(new String[] {fruit, ";"}); //cada fila una fruta separados por ;
             }
             csvWriter.writeAll(data);
             csvWriter.close();
+
+            this.exportFruits.clear(); //limpiamos la lista despues de exportar a CSV
         }catch (IOException e){
             e.printStackTrace();
         }
