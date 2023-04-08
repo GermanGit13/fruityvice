@@ -1,5 +1,6 @@
 package com.svalero.fruityvice.api.controller;
 
+import com.opencsv.CSVWriter;
 import com.svalero.fruityvice.api.model.FruitInformation;
 import com.svalero.fruityvice.api.model.Nutritions;
 import com.svalero.fruityvice.api.task.FamilyTask;
@@ -11,6 +12,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +74,8 @@ public class AppController {
     @FXML
     private TextField tfDetailSugar;
     @FXML
+    private TextField tfNameFile;
+    @FXML
     private TextArea listAllArea;
     @FXML
     private TextArea listFamily;
@@ -86,6 +92,10 @@ public class AppController {
 
     private List<String> fruitInformations; //Para guardar las datos recibidos de la API en este caso son definiciones de palabras
     private ArrayList<String> fruitDetails; //Para guardar el detalle de una fruta
+    private List<String> exportFruits; //Para crear una lista de frutas que exportar a CSV
+
+    Nutritions newNutrition;
+    FruitInformation newFruit;
 
 //    /**
 //     * Implemento Intialize para usarlo con las listas y la barra de proceso
@@ -209,8 +219,10 @@ public class AppController {
         int calories = Integer.parseInt(fruitDetails.get(8).toString());
         float sugar = Float.parseFloat(fruitDetails.get(9).toString());
 
-        Nutritions newNutrition = new Nutritions(carbohydrates, protein, fat, calories, sugar);
-        FruitInformation newFruit = new FruitInformation(genues, name, id, family, order, newNutrition);
+//        Nutritions newNutrition = new Nutritions(carbohydrates, protein, fat, calories, sugar);
+//        FruitInformation newFruit = new FruitInformation(genues, name, id, family, order, newNutrition);
+        this.newNutrition = new Nutritions(carbohydrates, protein, fat, calories, sugar);
+        this.newFruit = new FruitInformation(genues, name, id, family, order, newNutrition);
 
         tfDetailId.setText(String.valueOf(newFruit.getId()));
         tfDetailName.setText(newFruit.getName());
@@ -223,10 +235,41 @@ public class AppController {
         tfDetailCalories.setText(String.valueOf(newFruit.getNutritions().getCalories()));
         tfDetailSugar.setText(String.valueOf(newFruit.getNutritions().getSugar()));
 
+        this.exportFruits.add(newFruit.getGenus() + newFruit.getName() + newFruit.getId() + newFruit.getFamily() + newFruit.getOrder() + newFruit.getNutritions().getCarbohydrates() + newFruit.getNutritions().getProtein() + newFruit.getNutritions().getFat() + newFruit.getNutritions().getCalories() + newFruit.getNutritions().getSugar());
+
 //        this.listDetailArea.setText(listDetailArea.getText() + "\n" + "ID: " + newFruit.getId());
 //        this.listDetailArea.setText(listDetailArea.getText() + "\n" + "Name:  " + newFruit.getName());
 //        for (String fruitDetail : this.fruitDetails) { //recorremos la lista para volver a pintarla en el text area sin la definion que borramos
 //            this.listDetailArea.setText(listDetailArea.getText() + "\n" + fruitDetail); //lo mostramos en el text Area
 //        }
+    }
+
+    /**
+     * Para exportar a CSV usando la libreria openCSV
+     * @param event
+     */
+    @FXML
+    public void exportCSV(ActionEvent event) {
+        String nameFile = tfNameFile.getText();
+
+        if (nameFile == "") {
+            nameFile = "default";
+        }
+
+        File outputFile = new File(System.getProperty("user.dir") + System.getProperty("file.separator") //Creamos un fichero y lo guardamos en el directorio de la Aplicacion
+                + nameFile + ".csv"); //nombre del fichero
+
+        try {
+            FileWriter writer = new FileWriter(outputFile); //
+            CSVWriter csvWriter = new CSVWriter(writer); //Libreria opencsv
+            List<String[]> data = new ArrayList<String[]>(); // Lista de arrays de string lo guardamos xtodo en una estructura de datos antes de volcarla al csv
+            for (String fruit : this.fruitDetails){
+                data.add(new String[] {fruit}); //cada fila una deficinon y un numero random
+            }
+            csvWriter.writeAll(data);
+            csvWriter.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }
