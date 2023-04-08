@@ -193,7 +193,7 @@ public class AppController {
      */
     @FXML
     public void detailsFruit(ActionEvent event) {
-        this.listDetailArea.setText("");
+//        this.listDetailArea.setText("");
 
         /**
          * Recogemos los datos de la lista creada al consultar los valores nutricionales para crear un objeto FruitInformation
@@ -212,10 +212,19 @@ public class AppController {
         Nutritions newNutrition = new Nutritions(carbohydrates, protein, fat, calories, sugar);
         FruitInformation newFruit = new FruitInformation(genues, name, id, family, order, newNutrition);
 
-        this.listDetailArea.setText(listDetailArea.getText() + "\n" + "ID: " + newFruit.getId());
-        this.listDetailArea.setText(listDetailArea.getText() + "\n" + "Name:  " + newFruit.getName());
+        tfDetailId.setText(String.valueOf(newFruit.getId()));
+        tfDetailName.setText(newFruit.getName());
+        tfDetailFamily.setText(newFruit.getFamily());
+        tfDetailGenus.setText(newFruit.getGenus());
+        tfDetailOrder.setText(newFruit.getOrder());
+        tfDetailCarbo.setText(String.valueOf(newFruit.getNutritions().getCarbohydrates()));
+        tfDetailProtein.setText(String.valueOf(newFruit.getNutritions().getProtein()));
+        tfDetailFat.setText(String.valueOf(newFruit.getNutritions().getFat()));
+        tfDetailCalories.setText(String.valueOf(newFruit.getNutritions().getCalories()));
+        tfDetailSugar.setText(String.valueOf(newFruit.getNutritions().getSugar()));
 
-
+//        this.listDetailArea.setText(listDetailArea.getText() + "\n" + "ID: " + newFruit.getId());
+//        this.listDetailArea.setText(listDetailArea.getText() + "\n" + "Name:  " + newFruit.getName());
 //        for (String fruitDetail : this.fruitDetails) { //recorremos la lista para volver a pintarla en el text area sin la definion que borramos
 //            this.listDetailArea.setText(listDetailArea.getText() + "\n" + fruitDetail); //lo mostramos en el text Area
 //        }
