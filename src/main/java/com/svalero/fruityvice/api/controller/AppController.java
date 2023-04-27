@@ -6,6 +6,7 @@ import com.svalero.fruityvice.api.model.Nutritions;
 import com.svalero.fruityvice.api.task.FamilyTask;
 import com.svalero.fruityvice.api.task.FruitTask;
 import com.svalero.fruityvice.api.task.FruitsTask;
+import com.svalero.fruityvice.api.util.ZipFile;
 import io.reactivex.functions.Consumer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -257,14 +258,16 @@ public class AppController {
      */
     @FXML
     public void exportCSV(ActionEvent event) {
-        String nameFile = tfNameFile.getText();
+        String nameFile = tfNameFile.getText(); //recogemos el nombre de la cafa de texto
 
         if (nameFile == "") {
-            nameFile = "default";
+            nameFile = "default"; // si no le damos de nombre default
         }
 
-        File outputFile = new File(System.getProperty("user.dir") + System.getProperty("file.separator") //Creamos un fichero y lo guardamos en el directorio de la Aplicacion
-                + nameFile + ".csv"); //nombre del fichero
+        String outputFielName = System.getProperty("user.dir") + System.getProperty("file.separator") //Creamos un fichero y lo guardamos en el directorio de la Aplicacion
+                + nameFile + (".csv"); //nombre del fichero
+
+        File outputFile = new File(outputFielName); // le pasamos el nombre del fichero
 
         try {
             FileWriter writer = new FileWriter(outputFile); //
@@ -275,10 +278,42 @@ public class AppController {
             }
             csvWriter.writeAll(data);
             csvWriter.close();
+            ZipFile.createZipFile(outputFielName); //Le pasamos el fichero csv creado para que lo comprima
 
             this.exportFruits.clear(); //limpiamos la lista despues de exportar a CSV
         }catch (IOException e){
             e.printStackTrace();
         }
     }
+
+//    /**
+//     * Para exportar a CSV usando la libreria openCSV
+//     * @param event
+//     */
+//    @FXML
+//    public void exportCSV(ActionEvent event) {
+//        String nameFile = tfNameFile.getText();
+//
+//        if (nameFile == "") {
+//            nameFile = "default";
+//        }
+//
+//        File outputFile = new File(System.getProperty("user.dir") + System.getProperty("file.separator") //Creamos un fichero y lo guardamos en el directorio de la Aplicacion
+//                + nameFile + ".csv"); //nombre del fichero
+//
+//        try {
+//            FileWriter writer = new FileWriter(outputFile); //
+//            CSVWriter csvWriter = new CSVWriter(writer); //Libreria opencsv
+//            List<String[]> data = new ArrayList<String[]>(); // Lista de arrays de string lo guardamos xtodo en una estructura de datos antes de volcarla al csv
+//            for (String fruit : this.exportFruits){
+//                data.add(new String[] {fruit, ";"}); //cada fila una fruta separados por ;
+//            }
+//            csvWriter.writeAll(data);
+//            csvWriter.close();
+//
+//            this.exportFruits.clear(); //limpiamos la lista despues de exportar a CSV
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+//    }
 }
