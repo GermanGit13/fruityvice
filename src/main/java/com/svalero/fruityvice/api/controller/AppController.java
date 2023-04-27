@@ -34,8 +34,8 @@ public class AppController {
     private Button btDetailsFruit;
     @FXML
     private Button btAdd;
-    @FXML
-    private Button btCompress;
+//    @FXML
+//    private Button btCompress;
     @FXML
     private Button btExport;
     @FXML
@@ -249,7 +249,7 @@ public class AppController {
     @FXML
     public void addCSV(ActionEvent event) {
 
-         this.exportFruits.add(newFruit.getGenus() + newFruit.getName() + newFruit.getId() + newFruit.getFamily() + newFruit.getOrder() + newFruit.getNutritions().getCarbohydrates() + newFruit.getNutritions().getProtein() + newFruit.getNutritions().getFat() + newFruit.getNutritions().getCalories() + newFruit.getNutritions().getSugar());
+         this.exportFruits.add(newFruit.getGenus() + ";" + newFruit.getName() + ";" + newFruit.getId() + ";" + newFruit.getFamily() + ";" + newFruit.getOrder() + ";" + newFruit.getNutritions().getCarbohydrates() + ";" +  newFruit.getNutritions().getProtein() + ";" +  newFruit.getNutritions().getFat() + ";" +  newFruit.getNutritions().getCalories() + ";" +  newFruit.getNutritions().getSugar());
     }
 
     /**
@@ -274,7 +274,7 @@ public class AppController {
             CSVWriter csvWriter = new CSVWriter(writer); //Libreria opencsv
             List<String[]> data = new ArrayList<String[]>(); // Lista de arrays de string lo guardamos xtodo en una estructura de datos antes de volcarla al csv
             for (String fruit : this.exportFruits){
-                data.add(new String[] {fruit, ";"}); //cada fila una fruta separados por ;
+                data.add(new String[] {fruit}); //cada fila una fruta separados por ;
             }
             csvWriter.writeAll(data);
             csvWriter.close();

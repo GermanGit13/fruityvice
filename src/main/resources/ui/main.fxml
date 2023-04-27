@@ -146,7 +146,6 @@
                               </Label>
                               <Button fx:id="btAdd" layoutX="240.0" layoutY="185.0" mnemonicParsing="false" onAction="#addCSV" prefWidth="125.0" text="Añadir a Excell" />
                               <Button fx:id="btExport" layoutX="240.0" layoutY="227.0" mnemonicParsing="false" onAction="#exportCSV" prefWidth="125.0" text="Exportar a Excell" />
-                              <Button fx:id="btCompress" layoutX="240.0" layoutY="269.0" mnemonicParsing="false" prefWidth="125.0" text="Comprimir en zip" />
                               <ImageView fitHeight="150.0" fitWidth="221.0" layoutX="13.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../../../../../../../GERMAN/Imagenes/frutas-y-frutos-secos.jpg" />
