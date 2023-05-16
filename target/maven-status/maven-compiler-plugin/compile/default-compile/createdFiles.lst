@@ -1,0 +1,11 @@
+com\svalero\fruityvice\api\util\R.class
+com\svalero\fruityvice\api\model\FruitInformation.class
+com\svalero\fruityvice\api\controller\AppController.class
+com\svalero\fruityvice\api\task\FruitTask.class
+com\svalero\fruityvice\api\task\FamilyTask.class
+com\svalero\fruityvice\api\model\Nutritions.class
+com\svalero\fruityvice\api\service\FruityViceAPI.class
+com\svalero\fruityvice\api\util\ZipFile.class
+com\svalero\fruityvice\api\App.class
+com\svalero\fruityvice\api\task\FruitsTask.class
+com\svalero\fruityvice\api\service\FruitService.class

@@ -7,17 +7,23 @@ import com.svalero.fruityvice.api.task.FamilyTask;
 import com.svalero.fruityvice.api.task.FruitTask;
 import com.svalero.fruityvice.api.task.FruitsTask;
 import com.svalero.fruityvice.api.util.ZipFile;
+import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * declaramos los componentes que tenemos en el fmxl (scene builder)
@@ -86,6 +92,8 @@ public class AppController {
     private ProgressIndicator piChargeData;
     @FXML
     private ProgressBar pgChargeData;
+    @FXML
+    private ListView resultsListView; //creamos el  ListView del Scence Builder Suscribimos la listView al observalist
 
     private FruitsTask fruitsTask;
     private FamilyTask familyTask;
@@ -94,6 +102,7 @@ public class AppController {
     private List<String> fruitInformations; //Para guardar las datos recibidos de la API en este caso son definiciones de palabras
     private ArrayList<String> fruitDetails; //Para guardar el detalle de una fruta
     private List<String> exportFruits = new ArrayList<String>(); //Para crear una lista de frutas que exportar a CSV
+    private ObservableList<String> resultsFruits; //Creamos un observableList para meter los datos en un listView en la parte gráfica
 
     Nutritions newNutrition;
     FruitInformation newFruit;
@@ -107,22 +116,38 @@ public class AppController {
 //    }
 
     /**
+     * Para inicicializar la lista observable
+     */
+
+    public void initialize() {
+
+        this.resultsFruits = FXCollections.observableArrayList(); //forma de inicicializar la lista observable ObservableList<FruitInformation> resultsFruits
+        this.resultsListView.setItems(this.resultsFruits); //El listView se subscribe al observableList
+    }
+
+    /**
      * Método que se realizara al pulsar el boton en el entorno gráfico
      * esta definido en el onAction
      */
     @FXML
     public void showAll(ActionEvent event) {
         this.fruitInformations = new ArrayList<String>(); //creamos una lista nueva cada vez que pulsamos el botón buscar que invoca este método
-        listAllArea.setText("");
+//        listAllArea.setText("");
 
+        //Con un listView que se subscribe a un ObservableList
         Consumer<FruitInformation> user = (fruitInformation -> {
-            String previousText;
-            previousText = listAllArea.getText() + "\n";
-            Thread.sleep(100);
-            this.listAllArea.setText(listAllArea.getText() + "\n" + "ID: " + fruitInformation.getId() + " - Name: " + fruitInformation.getName() + " - Family: " + fruitInformation.getFamily()); //lo mostramos en el text Area
-            this.fruitInformations.add(fruitInformation.getGenus() + fruitInformation.getName() + fruitInformation.getId() + fruitInformation.getFamily() + fruitInformation.getOrder() + fruitInformation.getNutritions().getCarbohydrates() + fruitInformation.getNutritions().getProtein() + fruitInformation.getNutritions().getFat() + fruitInformation.getNutritions().getCalories() + fruitInformation.getNutritions().getSugar());
-            this.piChargeData.setVisible(false);
+            this.resultsFruits.add(fruitInformation.getGenus() + fruitInformation.getName() + fruitInformation.getId() + fruitInformation.getFamily() + fruitInformation.getOrder() + fruitInformation.getNutritions().getCarbohydrates() + fruitInformation.getNutritions().getProtein() + fruitInformation.getNutritions().getFat() + fruitInformation.getNutritions().getCalories() + fruitInformation.getNutritions().getSugar());
         });
+
+        //Con textArea
+//        Consumer<FruitInformation> user = (fruitInformation -> {
+//            String previousText;
+//            previousText = listAllArea.getText() + "\n";
+//            Thread.sleep(100);
+//            this.listAllArea.setText(listAllArea.getText() + "\n" + "ID: " + fruitInformation.getId() + " - Name: " + fruitInformation.getName() + " - Family: " + fruitInformation.getFamily()); //lo mostramos en el text Area
+//            this.fruitInformations.add(fruitInformation.getGenus() + fruitInformation.getName() + fruitInformation.getId() + fruitInformation.getFamily() + fruitInformation.getOrder() + fruitInformation.getNutritions().getCarbohydrates() + fruitInformation.getNutritions().getProtein() + fruitInformation.getNutritions().getFat() + fruitInformation.getNutritions().getCalories() + fruitInformation.getNutritions().getSugar());
+//            this.piChargeData.setVisible(false);
+//        });
 
         //Forma directa para evitar error de la API
 //        Consumer<FruitInformation> user = (fruitInformation -> {
@@ -130,8 +155,12 @@ public class AppController {
 //            this.fruitInformations.add(fruitInformation.getName());
 //        });
 
+
         fruitsTask = new FruitsTask(user, piChargeData);
         new Thread(fruitsTask).start();
+
+        this.resultsFruits = FXCollections.observableArrayList(); //forma de inicicializar la lista observable ObservableList<FruitInformation> resultsFruits
+        this.resultsListView.setItems(this.resultsFruits); //El listView se subscribe al observableList
     }
 
     /**
